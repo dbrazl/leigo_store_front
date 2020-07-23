@@ -1,4 +1,5 @@
 import { all, takeLatest, put, call, race, select } from "redux-saga/effects";
+import api from "../../../services/api";
 
 import errorHandler from "../utils/errorHandler";
 import timer from "../utils/timer";
@@ -22,7 +23,7 @@ function* indexProducts() {
     yield put(indexProductsSuccess(response.data));
     yield put(indexProductsRequest());
   } catch (error) {
-    yield pur(resetPage());
+    yield put(resetPage());
     yield errorHandler(error, productsFailure());
   }
 }

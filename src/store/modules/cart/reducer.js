@@ -1,5 +1,5 @@
 import produce from "immer";
-import _ from "loadash";
+import _ from "lodash";
 
 const INITIAL_STATE = {
   products: [],
@@ -9,40 +9,48 @@ export default function cart(state = INITIAL_STATE, action) {
   return produce(state, (draft) => {
     switch (action.type) {
       case "@cart/ADD_TO_CART":
-        const one = state.products.find(
+        let oneAdd = state.products.find(
           (item) => item.id === action.payload.item.id
         );
 
-        if (!!one) {
-          one.amount++;
-          const unionAdd = _.unionBy([one], state.products, "id");
-          draft.products = _.orderBy(unionAdd, ["name"], ["asc"]);
-        } else {
-          const unionAdd = _.unionBy(
-            [action.payload.item],
-            state.products,
-            "id"
-          );
+        add: {
+          if (!!oneAdd && oneAdd.stock < oneAdd.amount + 1) break add;
+
+          if (!!oneAdd) {
+            oneAdd.amount++;
+            const unionAdd = _.unionBy([oneAdd], state.products, "id");
+            draft.products = _.orderBy(unionAdd, ["name"], ["asc"]);
+            break add;
+          }
+
+          let toAdd = action.payload.item;
+          toAdd.amount = 1;
+
+          const unionAdd = _.unionBy([toAdd], state.products, "id");
           draft.products = _.orderBy(unionAdd, ["name"], ["asc"]);
         }
         break;
 
       case "@cart/REMOVE_ONE_FROM_CART":
-        const one = state.products.find(
+        let oneRemove = state.products.find(
           (item) => item.id === action.payload.item.id
         );
 
-        if (!!one) {
-          one.amount--;
-          const unionRemoveOne = _.unionBy([one], state.products, "id");
-          draft.products = _.orderBy(unionRemoveOne, ["name"], ["asc"]);
+        if (!!oneRemove && oneRemove.amount > 0) {
+          oneRemove.amount--;
+
+          if (oneRemove.amount === 0)
+            draft.products = _.differenceBy(state.products, [oneRemove], "id");
+          else {
+            const unionRemoveOne = _.unionBy([oneRemove], state.products, "id");
+            draft.products = _.orderBy(unionRemoveOne, ["name"], ["asc"]);
+          }
         } else {
-          const unionRemoveOne = _.unionBy(
-            [action.payload.item],
+          draft.products = _.differenceBy(
             state.products,
+            [action.payload.item],
             "id"
           );
-          draft.products = _.orderBy(unionRemoveOne, ["name"], ["asc"]);
         }
         break;
 

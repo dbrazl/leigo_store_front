@@ -6,6 +6,7 @@ import payament from "./payament/reducer";
 import products from "./products/reducer";
 import requests from "./requests/reducer";
 import user from "./user/reducer";
+import route from "./route/reducer";
 
 export default combineReducers({
   auth,
@@ -14,4 +15,5 @@ export default combineReducers({
   products,
   requests,
   user,
+  route,
 });
