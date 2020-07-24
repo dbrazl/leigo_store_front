@@ -20,6 +20,7 @@ import {
   Modal,
   ModalList,
   Tab,
+  Back,
 } from "./styles";
 
 function Header({ width }) {
@@ -33,20 +34,21 @@ function Header({ width }) {
   const routes = [
     {
       name: "Principal",
-      route: "/",
+      path: "/",
     },
     {
       name: "Carrinho",
-      route: "/cart",
+      path: "/cart",
     },
     {
       name: "Login",
-      route: "/login",
+      path: "/login",
     },
   ];
 
   useEffect(() => {
     window.addEventListener("resize", resizeEvent);
+    window.scrollTo(0, 0);
 
     return () => window.removeEventListener("resize", resizeEvent);
   }, []);
@@ -71,7 +73,9 @@ function Header({ width }) {
       <Container>
         <Content>
           <Wrapper>
-            <Logo />
+            <Back to="/">
+              <Logo />
+            </Back>
             <Nav>
               {number > 0 && <Badge>{number}</Badge>}
               <Button>
@@ -106,11 +110,17 @@ function Header({ width }) {
 
     if (route.name === routeSelected)
       return (
-        <Tab selected key={key}>
-          {route.name}
+        <Tab selected key={key} to={route.path}>
+          <p style={{ color: "#fff" }}>{route.name}</p>
         </Tab>
       );
-    else return <Tab key={key}>{route.name}</Tab>;
+    else
+      return (
+        <Tab key={key} to={route.path}>
+          {" "}
+          <p style={{ color: "#afafaf" }}>{route.name}</p>
+        </Tab>
+      );
   }
 
   function renderMobileHeader() {

@@ -3,6 +3,7 @@ import _ from "lodash";
 
 const INITIAL_STATE = {
   products: [],
+  total: 0,
 };
 
 export default function cart(state = INITIAL_STATE, action) {
@@ -20,6 +21,7 @@ export default function cart(state = INITIAL_STATE, action) {
             oneAdd.amount++;
             const unionAdd = _.unionBy([oneAdd], state.products, "id");
             draft.products = _.orderBy(unionAdd, ["name"], ["asc"]);
+            draft.total += action.payload.item.price;
             break add;
           }
 
@@ -28,6 +30,7 @@ export default function cart(state = INITIAL_STATE, action) {
 
           const unionAdd = _.unionBy([toAdd], state.products, "id");
           draft.products = _.orderBy(unionAdd, ["name"], ["asc"]);
+          draft.total += action.payload.item.price;
         }
         break;
 
@@ -52,6 +55,8 @@ export default function cart(state = INITIAL_STATE, action) {
             "id"
           );
         }
+
+        if (state.total > 0) draft.total -= action.payload.item.price;
         break;
 
       case "@cart/REMOVE_FROM_CART":
@@ -59,12 +64,15 @@ export default function cart(state = INITIAL_STATE, action) {
           (item) => item.id === action.payload.item.id
         );
 
-        if (!!one)
+        if (!!one) {
           draft.products = _.differenceBy(
             state.products,
             [action.payload.item],
             "id"
           );
+          draft.total -= one.price * one.amount;
+        }
+
         break;
       default:
     }

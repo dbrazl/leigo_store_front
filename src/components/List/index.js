@@ -32,6 +32,7 @@ import {
   Trash,
   Board,
   Photo,
+  Price,
 } from "./styles";
 
 function List() {
@@ -64,6 +65,7 @@ function List() {
       stock: 5,
       amount: 0,
       category: "Canecas",
+      price: 30.0,
     },
     {
       id: 2,
@@ -73,6 +75,7 @@ function List() {
       stock: 5,
       amount: 0,
       category: "Camisas",
+      price: 25.0,
     },
     {
       id: 3,
@@ -82,6 +85,7 @@ function List() {
       stock: 1,
       amount: 0,
       category: "Canecas",
+      price: 30.0,
     },
     {
       id: 4,
@@ -91,6 +95,7 @@ function List() {
       stock: 5,
       amount: 0,
       category: "Camisas",
+      price: 25.0,
     },
   ];
 
@@ -134,12 +139,17 @@ function List() {
 
   function renderItem(product) {
     const onCart = productsOnCart.find((item) => item.id === product.id);
+    const price = product.price.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
 
     if (product.stock > 0) {
       return (
         <Item>
-          <Board>
+          <Board to={`/product/${product.id}`}>
             <Photo imageSmall={product.imageSmall} src={product.image} />
+            <Price>{price}</Price>
           </Board>
           <Name>{product.name}</Name>
           <Controller>

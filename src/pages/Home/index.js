@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
+
+import { useDispatch } from "react-redux";
+import { setRoute } from "../../store/modules/route/actions";
 
 import Header from "../../components/Header";
 import List from "../../components/List";
@@ -14,6 +17,12 @@ import {
 } from "./styles";
 
 function Home() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setRoute("Principal"));
+  }, []);
+
   return (
     <Container>
       <Header />

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { FiSearch, FiTrash, FiPlus, FiMinus } from "react-icons/fi";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   width: 100%;
@@ -107,7 +108,7 @@ export const Item = styled.div`
   }
 `;
 
-export const Board = styled.div`
+export const Board = styled(Link)`
   width: 200px;
   height: 164px;
   border-radius: 20px;
@@ -115,6 +116,8 @@ export const Board = styled.div`
   position: absolute;
   bottom: 150px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
 
   @media (min-width: 420px) {
     width: 280px;
@@ -125,12 +128,13 @@ export const Board = styled.div`
 export const Photo = styled.img`
   height: ${(props) => (props.imageSmall ? 200 : 350)}px;
   object-fit: contain;
-  position: absolute;
-  right: ${(props) => (props.imageSmall ? -55 : -60)}px;
-  bottom: 0px;
+  right: ${(props) => (props.imageSmall ? 0 : -65)}px;
+  bottom: ${(props) => (props.imageSmall ? 50 : 0)}px;
   cursor: pointer;
+  position: absolute;
 
   @media (min-width: 420px) {
+    bottom: 0;
     height: ${(props) => (props.imageSmall ? 300 : 450)}px;
     right: ${(props) => (props.imageSmall ? -110 : -50)}px;
   }
@@ -150,7 +154,6 @@ export const Name = styled.p`
     left: 60px;
     bottom: 90px;
     width: 300px;
-    font-size: 32px;
   }
 `;
 
@@ -163,7 +166,7 @@ export const Controller = styled.div`
   margin-right: 25px;
   position: absolute;
   right: 0;
-  bottom: 0;
+  bottom: 0px;
 `;
 
 export const Trash = styled(FiTrash)`
@@ -213,4 +216,16 @@ export const Count = styled.p`
   @media (min-width: 420px) {
     font-size: 32px;
   }
+`;
+
+export const Price = styled.p`
+  padding: 5px 10px;
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  background: #424242;
+  border-radius: 10px;
+  margin: 0 auto;
+  position: absolute;
+  bottom: -16px;
 `;

@@ -17,7 +17,7 @@ export default createGlobalStyle`
         flex: 1;
     }
 
-    p, h1, h2, h3, button, input, a {
+    p, h1, h2, h3, button, input, a, area {
         font-family: 'Nunito', 'Roboto', sans-serif;
         color: #000;
         background: transparent;

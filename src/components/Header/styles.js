@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import logo from "../../assets/images/logo.png";
 import { FiUser, FiShoppingCart, FiMenu } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   height: 80px;
@@ -110,7 +111,7 @@ export const ModalList = styled.div`
   }
 `;
 
-export const Tab = styled.p`
+export const Tab = styled(Link)`
   height: 45px;
   width: 100%;
   padding: auto 0px;
@@ -121,4 +122,10 @@ export const Tab = styled.p`
   font-size: 18px;
   display: flex;
   align-items: center;
+`;
+
+export const Back = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
