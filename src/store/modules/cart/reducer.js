@@ -4,6 +4,7 @@ import _ from "lodash";
 const INITIAL_STATE = {
   products: [],
   total: 0,
+  amount: 0,
 };
 
 export default function cart(state = INITIAL_STATE, action) {
@@ -22,6 +23,7 @@ export default function cart(state = INITIAL_STATE, action) {
             const unionAdd = _.unionBy([oneAdd], state.products, "id");
             draft.products = _.orderBy(unionAdd, ["name"], ["asc"]);
             draft.total += action.payload.item.price;
+            draft.amount = state.amount + 1;
             break add;
           }
 
@@ -31,6 +33,7 @@ export default function cart(state = INITIAL_STATE, action) {
           const unionAdd = _.unionBy([toAdd], state.products, "id");
           draft.products = _.orderBy(unionAdd, ["name"], ["asc"]);
           draft.total += action.payload.item.price;
+          draft.amount = state.amount + 1;
         }
         break;
 
@@ -57,6 +60,7 @@ export default function cart(state = INITIAL_STATE, action) {
         }
 
         if (state.total > 0) draft.total -= action.payload.item.price;
+        if (state.amount > 0) draft.amount = state.amount - 1;
         break;
 
       case "@cart/REMOVE_FROM_CART":
@@ -71,6 +75,7 @@ export default function cart(state = INITIAL_STATE, action) {
             "id"
           );
           draft.total -= one.price * one.amount;
+          draft.amount = state.amount - one.amount;
         }
 
         break;

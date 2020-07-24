@@ -6,7 +6,7 @@ export default (reducers) => {
     {
       key: "leigoStore",
       storage,
-      whitelist: ["auth", "user"],
+      whitelist: ["auth", "user", "cart"],
     },
     reducers
   );

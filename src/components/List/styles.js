@@ -78,13 +78,13 @@ export const WrapperList = styled.section`
   display: row;
   display: flex;
   position: absolute;
-  top: 150px;
+  top: ${(props) => props.top}px;
   justify-content: center;
   min-width: 100%;
   min-height: 500px;
 
   @media (min-width: 420px) {
-    top: 250px;
+    top: ${(props) => props.top}px;
   }
 
   @media (min-width: 824px) {

@@ -25,7 +25,7 @@ import {
 
 function Header({ width }) {
   const products = useSelector((state) => state.cart.products);
-  const [number, setNumber] = useState(0);
+  const amount = useSelector((state) => state.cart.amount);
   const [widthState, setWidthState] = useState(window.innerWidth);
   const [modal, setModal] = useState(false);
   const [timeout, setTimeout] = useState(null);
@@ -58,16 +58,6 @@ function Header({ width }) {
     setWidthState(innerWidth);
   }
 
-  useEffect(() => {
-    let amount = 0;
-
-    products.forEach((product) => {
-      amount += product.amount;
-    });
-
-    setNumber(amount);
-  }, [products]);
-
   function renderDesktopHeader() {
     return (
       <Container>
@@ -77,12 +67,12 @@ function Header({ width }) {
               <Logo />
             </Back>
             <Nav>
-              {number > 0 && <Badge>{number}</Badge>}
-              <Button>
+              {amount > 0 && <Badge>{amount}</Badge>}
+              <Button to="/cart">
                 <Cart />
                 <Label>carrinho</Label>
               </Button>
-              <Button>
+              <Button to="/login">
                 <User />
                 <Label>login</Label>
               </Button>

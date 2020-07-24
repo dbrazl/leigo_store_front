@@ -1,9 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
-
-import asset1 from "../../assets/images/items/asset1.png";
-import asset2 from "../../assets/images/items/asset2.png";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -35,8 +32,11 @@ import {
   Price,
 } from "./styles";
 
-function List() {
+function List({ noFilters, products, topList }) {
   const [nav, setNav] = useState("Todos");
+  const [filtered, setFiltered] = useState(products);
+  const [length, setLenght] = useState(products.lenght);
+
   const categories = [
     "Todos",
     "Camisas",
@@ -50,56 +50,17 @@ function List() {
     "Tirantes",
   ];
 
-  // const products = useSelector((state) => state.products.products);
   // const categories = useSelector((state) => state.products.categories);
   const productsOnCart = useSelector((state) => state.cart.products);
 
+  useEffect(() => {
+    if (products.length !== length) {
+      setLenght(filtered.length);
+      setFiltered(products);
+    }
+  }, [products]);
+
   const dispatch = useDispatch();
-
-  const products = [
-    {
-      id: 1,
-      name: "Caneca JOIA 2018",
-      image: asset1,
-      imageSmall: true,
-      stock: 5,
-      amount: 0,
-      category: "Canecas",
-      price: 30.0,
-    },
-    {
-      id: 2,
-      name: "Camisa Intereng 2019",
-      image: asset2,
-      imageSmall: false,
-      stock: 5,
-      amount: 0,
-      category: "Camisas",
-      price: 25.0,
-    },
-    {
-      id: 3,
-      name: "Caneca JOIA 2018",
-      image: asset1,
-      imageSmall: true,
-      stock: 1,
-      amount: 0,
-      category: "Canecas",
-      price: 30.0,
-    },
-    {
-      id: 4,
-      name: "Camisa Intereng 2019",
-      image: asset2,
-      imageSmall: false,
-      stock: 5,
-      amount: 0,
-      category: "Camisas",
-      price: 25.0,
-    },
-  ];
-
-  const [filtered, setFiltered] = useState(products);
 
   function selectCategorie(event) {
     const tab = event.target.innerHTML;
@@ -166,17 +127,21 @@ function List() {
   return (
     <Container>
       <Content>
-        <Search>
-          <Input
-            placeholder="Filtrar"
-            onChange={(event) => searchProduct(event.target.value)}
-          />
-          <Icon />
-        </Search>
-        <WrapperMenu>
-          <Menu>{categories.map((name) => renderLabel(name))}</Menu>
-        </WrapperMenu>
-        <WrapperList>
+        {!noFilters && (
+          <>
+            <Search>
+              <Input
+                placeholder="Filtrar"
+                onChange={(event) => searchProduct(event.target.value)}
+              />
+              <Icon />
+            </Search>
+            <WrapperMenu>
+              <Menu>{categories.map((name) => renderLabel(name))}</Menu>
+            </WrapperMenu>
+          </>
+        )}
+        <WrapperList top={topList}>
           {filtered.map((product) => renderItem(product))}
         </WrapperList>
       </Content>
@@ -185,11 +150,15 @@ function List() {
 }
 
 List.propTypes = {
-  data: PropTypes.array,
+  products: PropTypes.array,
+  noFilters: PropTypes.bool,
+  topList: PropTypes.number,
 };
 
 List.defaultProps = {
-  data: [],
+  products: [],
+  noFilters: false,
+  topList: 150,
 };
 
 export default List;

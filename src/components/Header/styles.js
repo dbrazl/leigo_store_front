@@ -9,6 +9,10 @@ export const Container = styled.div`
   background: #ffbb29;
   display: flex;
   justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
 `;
 
 export const Wrapper = styled.div`
@@ -32,10 +36,11 @@ export const Nav = styled.nav`
   flex-direction: row;
 `;
 
-export const Button = styled.button`
+export const Button = styled(Link)`
   display: flex;
   align-items: center;
   margin-left: 20px;
+  text-decoration: none;
 `;
 
 export const User = styled(FiUser)`

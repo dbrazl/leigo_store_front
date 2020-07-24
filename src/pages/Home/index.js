@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
 
+import asset1 from "../../assets/images/items/asset1.png";
+import asset2 from "../../assets/images/items/asset2.png";
+
 import { useDispatch } from "react-redux";
 import { setRoute } from "../../store/modules/route/actions";
 
@@ -23,6 +26,49 @@ function Home() {
     dispatch(setRoute("Principal"));
   }, []);
 
+  const products = [
+    {
+      id: 1,
+      name: "Caneca JOIA 2018",
+      image: asset1,
+      imageSmall: true,
+      stock: 5,
+      amount: 0,
+      category: "Canecas",
+      price: 30.0,
+    },
+    {
+      id: 2,
+      name: "Camisa Intereng 2019",
+      image: asset2,
+      imageSmall: false,
+      stock: 5,
+      amount: 0,
+      category: "Camisas",
+      price: 25.0,
+    },
+    {
+      id: 3,
+      name: "Caneca JOIA 2018",
+      image: asset1,
+      imageSmall: true,
+      stock: 1,
+      amount: 0,
+      category: "Canecas",
+      price: 30.0,
+    },
+    {
+      id: 4,
+      name: "Camisa Intereng 2019",
+      image: asset2,
+      imageSmall: false,
+      stock: 5,
+      amount: 0,
+      category: "Camisas",
+      price: 25.0,
+    },
+  ];
+
   return (
     <Container>
       <Header />
@@ -35,7 +81,7 @@ function Home() {
         </Box>
       </Banner>
       <Shape />
-      <List />
+      <List products={products} />
     </Container>
   );
 }
