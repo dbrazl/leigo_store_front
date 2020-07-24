@@ -42,7 +42,7 @@ function Header({ width }) {
     },
     {
       name: "Login",
-      path: "/login",
+      path: "/signIn",
     },
   ];
 
@@ -72,7 +72,7 @@ function Header({ width }) {
                 <Cart />
                 <Label>carrinho</Label>
               </Button>
-              <Button to="/login">
+              <Button to="/signIn">
                 <User />
                 <Label>login</Label>
               </Button>

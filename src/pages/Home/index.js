@@ -24,6 +24,7 @@ function Home() {
 
   useEffect(() => {
     dispatch(setRoute("Principal"));
+    window.scrollTo(0, 0);
   }, []);
 
   const products = [

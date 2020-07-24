@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import { useSelector } from "react-redux";
+import { setRoute } from "../../store/modules/route/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 import View from "./view";
 
@@ -10,8 +11,13 @@ function Index() {
   const amount = useSelector((state) => state.cart.amount);
   const total = useSelector((state) => state.cart.total);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     window.addEventListener("resize", resizeEvent);
+    window.scrollTo(0, 0);
+
+    dispatch(setRoute("Carrinho"));
 
     return () => window.removeEventListener("resize", resizeEvent);
   }, []);

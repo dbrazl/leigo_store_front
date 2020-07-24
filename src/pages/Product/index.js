@@ -69,6 +69,7 @@ function Product({ match: { params } }) {
     const { id } = params;
     const finded = products.find((one) => one.id === id);
     setProduct(finded);
+    window.scrollTo(0, 0);
 
     dispatch(setRoute("Product"));
   }, []);
