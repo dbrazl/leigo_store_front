@@ -5,6 +5,7 @@ const INITIAL_STATE = {
     name: "",
     username: "",
     email: "",
+    avatar: "",
   },
   status: {
     loading: false,
@@ -20,6 +21,16 @@ const INITIAL_STATE = {
 export default function user(state = INITIAL_STATE, action) {
   return produce(state, (draft) => {
     switch (action.type) {
+      case "@user/UPDATE_AVATAR_REQUEST":
+        draft.status.loading = true;
+        draft.error = INITIAL_STATE.error;
+        break;
+
+      case "@user/UPDATE_AVATAR_SUCCESS":
+        draft.status.loading = false;
+        draft.profile.avatar = action.payload.body.url;
+        break;
+
       case "@auth/SIGN_IN_SUCCESS":
         const { name, username, email } = action.payload.body;
         draft.profile.name = name;

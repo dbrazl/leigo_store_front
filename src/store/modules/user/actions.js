@@ -1,3 +1,17 @@
+export function updateAvatarRequest(file) {
+  return {
+    type: "@user/UPDATE_AVATAR_REQUEST",
+    payload: { file },
+  };
+}
+
+export function updateAvatarSuccess(body) {
+  return {
+    type: "@user/UPDATE_AVATAR_SUCCESS",
+    payload: { body },
+  };
+}
+
 export function updateUserRequest(body) {
   return {
     type: "@user/UPDATE_USER_REQUEST",

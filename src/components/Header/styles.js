@@ -108,7 +108,6 @@ export const ModalList = styled.div`
   position: absolute;
   top: 150px;
   left: 0px;
-  background: red;
   width: 93%;
 
   @media (min-width: 500px) {
