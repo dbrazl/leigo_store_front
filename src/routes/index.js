@@ -5,7 +5,9 @@ import Route from "./route";
 import Home from "../pages/Home";
 import Product from "../pages/Product";
 import Cart from "../pages/Cart";
-import SignIn from "../pages/SignIn";
+import SignIn from "../pages/Auth/SignIn";
+import SignUp from "../pages/Auth/SignUp";
+import Restore from "../pages/Auth/Restore";
 
 function Routes() {
   return (
@@ -14,6 +16,8 @@ function Routes() {
       <Route path="/product/:id" exact component={Product} />
       <Route path="/cart" exact component={Cart} />
       <Route path="/signIn" exact component={SignIn} />
+      <Route path="/signUp" exact component={SignUp} />
+      <Route path="/restore" exact component={Restore} />
     </Switch>
   );
 }
