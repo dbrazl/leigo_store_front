@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Input from "../../../../../components/Input";
 
@@ -13,15 +13,9 @@ import {
   Form,
   Emblem,
   Recover,
-  ModalContainer,
-  Modal,
-  Ilustration,
-  Message,
 } from "./styles";
 
 function Index() {
-  const [modal, setModal] = useState(false);
-
   return (
     <Container>
       <Content>
@@ -38,17 +32,6 @@ function Index() {
             </Button>
           </Form>
         </Column>
-        {modal && (
-          <ModalContainer>
-            <Modal>
-              <Ilustration />
-              <Message>Uma nova senha foi enviada a seu e-mail!</Message>
-              <Button marginTop={30} background="#424242" color="#fff">
-                fechar
-              </Button>
-            </Modal>
-          </ModalContainer>
-        )}
       </Content>
       <Background />
       <Opacity />

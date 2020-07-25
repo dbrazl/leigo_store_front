@@ -2,7 +2,6 @@ import styled from "styled-components";
 import background from "../../../../../assets/images/login-bg.png";
 import emblem from "../../../../../assets/images/emblem.png";
 import { FiRefreshCw } from "react-icons/fi";
-import ilustration from "../../../../../assets/images/recover-ilustration.png";
 
 export const Container = styled.div`
   height: ${window.innerHeight}px;
@@ -92,41 +91,4 @@ export const Recover = styled(FiRefreshCw)`
   width: 32px;
   height: 32px;
   color: #fff;
-`;
-
-export const ModalContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
-
-export const Modal = styled.div`
-  width: 600px;
-  height: 500px;
-  background: #fff;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-`;
-
-export const Ilustration = styled.img.attrs({
-  src: ilustration,
-})`
-  width: 450px;
-  object-fit: contain;
-`;
-
-export const Message = styled.p`
-  font-size: 24px;
-  color: #000;
-  margin-top: 30px;
 `;
