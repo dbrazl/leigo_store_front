@@ -9,6 +9,7 @@ import SignIn from "../pages/Auth/SignIn";
 import SignUp from "../pages/Auth/SignUp";
 import Restore from "../pages/Auth/Restore";
 import MyAccount from "../pages/MyAccount";
+import Payament from "../pages/Payament";
 
 function Routes() {
   return (
@@ -20,6 +21,7 @@ function Routes() {
       <Route path="/signUp" exact component={SignUp} />
       <Route path="/restore" exact component={Restore} />
       <Route path="/account" exact component={MyAccount} />
+      <Route path="/payament" exact component={Payament} />
     </Switch>
   );
 }

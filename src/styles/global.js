@@ -5,6 +5,12 @@ import "react-perfect-scrollbar/dist/css/styles.css";
 export default createGlobalStyle`
 
     @import url('https://fonts.googleapis.com/css2?family=Nunito&family=Roboto&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+    @font-face {
+        font-family: "OcrA";
+        src: url('../assets/fonts/OcrA.ttf') format("ttf");
+    }
 
     * {
         padding: 0;
