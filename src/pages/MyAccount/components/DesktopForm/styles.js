@@ -46,6 +46,8 @@ export const Photo = styled.img`
   background: #c5c5c5;
   position: absolute;
   top: -75px;
+  object-fit: cover;
+  cursor: pointer;
 `;
 
 export const Input = styled.input`
@@ -105,9 +107,10 @@ export const Card = styled.div`
 `;
 
 export const ProductPhoto = styled.img`
-  width: 100px;
-  height: 100px;
-  background: #c5c5c5;
+  width: 90px;
+  height: 90px;
+  padding: 10px;
+  background: ${(props) => (props.src ? "#eee" : "#c5c5c5")};
   border-radius: 10px;
   margin-left: 25px;
 `;
@@ -156,7 +159,7 @@ export const Info = styled.div`
   flex-direction: column;
 `;
 
-export const Date = styled.p`
+export const Buy = styled.p`
   font-size: 18px;
   letter-spacing: 2.5px;
   color: #000;
@@ -165,4 +168,10 @@ export const Date = styled.p`
 export const Total = styled.p`
   font-size: 32px;
   font-weight: bold;
+`;
+
+export const Logout = styled.button`
+  font-size: 24px;
+  position: absolute;
+  bottom: -100px;
 `;

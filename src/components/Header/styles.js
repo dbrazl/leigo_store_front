@@ -49,6 +49,13 @@ export const User = styled(FiUser)`
   color: #000;
 `;
 
+export const Photo = styled.img`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #c5c5c5;
+`;
+
 export const Cart = styled(FiShoppingCart)`
   width: 32px;
   height: 32px;

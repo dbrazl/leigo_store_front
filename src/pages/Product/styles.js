@@ -94,8 +94,8 @@ export const Name = styled.p`
   }
 `;
 
-export const Description = styled.textarea`
-  font-size: 18px;
+export const Description = styled.p`
+  font-size: 20px;
   line-height: 30px;
   width: 200px;
   height: 100px;

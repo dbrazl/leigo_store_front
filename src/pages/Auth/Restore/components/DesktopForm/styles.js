@@ -2,6 +2,7 @@ import styled from "styled-components";
 import background from "../../../../../assets/images/login-bg.png";
 import emblem from "../../../../../assets/images/emblem.png";
 import { FiRefreshCw } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   height: ${window.innerHeight}px;
@@ -52,7 +53,7 @@ export const Label = styled.p`
   text-align: right;
 `;
 
-export const Button = styled.button`
+export const Button = styled(Link)`
   height: 45px;
   width: 200px;
   border-radius: 10px;
@@ -63,6 +64,7 @@ export const Button = styled.button`
   font-size: 24px;
   color: ${(props) => (props.color ? props.color : "#000")};
   margin-top: ${(props) => (props.marginTop ? props.marginTop : 0)}px;
+  text-decoration: none;
 `;
 
 export const Form = styled.form`

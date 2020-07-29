@@ -16,18 +16,14 @@ function* updateAvatar({ payload }) {
     const { file } = payload;
 
     const formData = new FormData();
-    formData.append("file", {
-      uri: file.uri,
-      type: file.type,
-      name: file.fileName,
-    });
+    formData.append("file", file);
 
     const { response } = yield race({
       response: call(api.post, "/avatar", formData),
       timeout: call(timer),
     });
 
-    yield put(updateAvatarSuccess(response.body));
+    yield put(updateAvatarSuccess(response.data));
   } catch (error) {
     yield errorHandler(error, userFailure);
   }

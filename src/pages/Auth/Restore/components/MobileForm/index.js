@@ -11,7 +11,7 @@ function Index() {
       <Button>
         <Recover />
       </Button>
-      <Back>voltar</Back>
+      <Back to="/signIn">voltar</Back>
     </Container>
   );
 }

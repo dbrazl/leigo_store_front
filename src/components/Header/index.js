@@ -13,6 +13,7 @@ import {
   Button,
   Cart,
   User,
+  Photo,
   Label,
   Badge,
   Menu,
@@ -23,12 +24,14 @@ import {
   Back,
 } from "./styles";
 
+import photo from "~/assets/images/photo.png";
+
 function Header({ width }) {
-  const products = useSelector((state) => state.cart.products);
   const amount = useSelector((state) => state.cart.amount);
+  const signed = useSelector((state) => state.auth.status.signed);
+  const user = useSelector((state) => state.user.profile);
   const [widthState, setWidthState] = useState(window.innerWidth);
   const [modal, setModal] = useState(false);
-  const [timeout, setTimeout] = useState(null);
   const routeSelected = useSelector((state) => state.route.route);
 
   const routes = [
@@ -42,7 +45,7 @@ function Header({ width }) {
     },
     {
       name: "Login",
-      path: "/signIn",
+      path: signed ? "/account" : "/signIn",
     },
   ];
 
@@ -72,9 +75,9 @@ function Header({ width }) {
                 <Cart />
                 <Label>carrinho</Label>
               </Button>
-              <Button to="/signIn">
-                <User />
-                <Label>login</Label>
+              <Button to={signed ? "/account" : "/signIn"}>
+                {signed ? <Photo src={user.avatar || photo} /> : <User />}
+                <Label>{signed ? user.name.split(" ")[0] : "login"}</Label>
               </Button>
             </Nav>
           </Wrapper>
@@ -84,15 +87,8 @@ function Header({ width }) {
   }
 
   function onClickMenuMobile() {
-    if (modal) {
-      const timeout = setTimeout(() => {
-        setModal(false);
-      }, 500);
-
-      setTimeout(timeout);
-    } else {
-      setModal(true);
-    }
+    if (modal) setModal(false);
+    else setModal(true);
   }
 
   function renderTabs(route) {

@@ -65,7 +65,7 @@ export const Label = styled.p`
   color: ${(props) => (props.selected ? "#FFBB29" : "#000")};
   font-weight: ${(props) => (props.selected ? 800 : 400)};
   cursor: pointer;
-  margin-right: 20px;
+  margin-right: 50px;
   margin-left: 20px;
 
   & + & {
@@ -82,6 +82,7 @@ export const WrapperList = styled.section`
   justify-content: center;
   min-width: 100%;
   min-height: 500px;
+  padding-top: 80px;
 
   @media (min-width: 420px) {
     top: ${(props) => props.top}px;

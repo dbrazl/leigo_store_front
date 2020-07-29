@@ -42,7 +42,7 @@ function View({ width, products, amount, total }) {
       {width < 824 && <Info>{renderInfo("center")}</Info>}
       <Painel>
         <PainelItems>
-          {amount > 0 && <Button>fechar pedido</Button>}
+          {amount > 0 && <Button to="/payament">fechar pedido</Button>}
           {width > 824 && renderInfo()}
         </PainelItems>
       </Painel>

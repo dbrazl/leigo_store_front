@@ -20,8 +20,8 @@ function Routes() {
       <Route path="/signIn" exact component={SignIn} />
       <Route path="/signUp" exact component={SignUp} />
       <Route path="/restore" exact component={Restore} />
-      <Route path="/account" exact component={MyAccount} />
-      <Route path="/payament" exact component={Payament} />
+      <Route path="/account" exact isPrivate component={MyAccount} />
+      <Route path="/payament" exact isPrivate component={Payament} />
     </Switch>
   );
 }

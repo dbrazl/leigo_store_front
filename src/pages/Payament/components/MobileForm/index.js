@@ -95,7 +95,7 @@ function MobileForm({
         <Button>
           <CreditCard />
         </Button>
-        <Back>voltar</Back>
+        <Back to="/cart">voltar</Back>
       </>
     );
   }
@@ -116,7 +116,7 @@ function MobileForm({
           <Button>
             <Dolar />
           </Button>
-          <Back>voltar</Back>
+          <Back to="/cart">voltar</Back>
         </Footer>
       </>
     );

@@ -11,7 +11,7 @@ export default function RouteWrapper({
 }) {
   const { signed } = store.getState().auth.status;
 
-  if (!signed && isPrivate) return <Redirect to="/" />;
+  if (!signed && isPrivate) return <Redirect to="/signIn" />;
 
   //   if (signed && !isPrivate)
   //     return <Redirect to="/home" />;

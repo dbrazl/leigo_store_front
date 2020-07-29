@@ -21,6 +21,8 @@ function View({
   name,
   setName,
   onGrantLostFocus,
+  total,
+  amount,
 }) {
   const tabs = ["Cartão de crédito", "Boleto"];
 
@@ -58,6 +60,8 @@ function View({
           setName={setName}
           onGrantLostFocus={onGrantLostFocus}
           selected={selected}
+          total={total}
+          amount={amount}
         />
       ) : (
         <DesktopForm
@@ -72,6 +76,8 @@ function View({
           setName={setName}
           onGrantLostFocus={onGrantLostFocus}
           selected={selected}
+          total={total}
+          amount={amount}
         />
       )}
     </Container>
@@ -92,6 +98,8 @@ View.propTypes = {
   name: PropTypes.string,
   setName: PropTypes.func,
   onGrantLostFocus: PropTypes.func,
+  total: PropTypes.number,
+  amount: PropTypes.number,
 };
 
 View.defaultProps = {
@@ -108,6 +116,8 @@ View.defaultProps = {
   name: "nome do proprietário",
   setName: () => {},
   onGrantLostFocus: () => {},
+  total: 0,
+  amount: 0,
 };
 
 export default View;

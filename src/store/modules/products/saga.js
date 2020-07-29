@@ -9,6 +9,7 @@ import {
   indexProductsSuccess,
   productsFailure,
   resetPage,
+  indexOneProductSuccess,
 } from "./actions";
 
 function* indexProducts() {
@@ -16,7 +17,7 @@ function* indexProducts() {
     const page = yield select((state) => state.products.page);
 
     const { response } = yield race({
-      response: call(api.get, `/products?page=${page}`),
+      response: call(api.get, `/product?page=${page}`),
       timeout: call(timer),
     });
 
@@ -24,10 +25,26 @@ function* indexProducts() {
     yield put(indexProductsRequest());
   } catch (error) {
     yield put(resetPage());
-    yield errorHandler(error, productsFailure());
+    yield errorHandler(error, productsFailure);
+  }
+}
+
+function* indexOneProduct({ payload }) {
+  try {
+    const { id } = payload.params;
+
+    const { response } = yield race({
+      response: call(api.get, `/product/${id}`),
+      timeout: call(timer),
+    });
+
+    yield put(indexOneProductSuccess(response.data));
+  } catch (error) {
+    yield errorHandler(error, productsFailure);
   }
 }
 
 export default all([
   takeLatest("@products/INDEX_PRODUCTS_REQUEST", indexProducts),
+  takeLatest("@products/INDEX_ONE_PRODUCT_REQUEST", indexOneProduct),
 ]);

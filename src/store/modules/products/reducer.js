@@ -3,7 +3,19 @@ import _ from "lodash";
 
 const INITIAL_STATE = {
   products: [],
-  categories: [],
+  product: {
+    name: "Nome do produto",
+    description: "Descrição do produto",
+    stock: 0,
+    unit_price: 0,
+    active: true,
+    image: "",
+    categories: [
+      {
+        category: "tag",
+      },
+    ],
+  },
   page: 0,
   status: {
     loading: false,
@@ -37,6 +49,16 @@ export default function products(state = INITIAL_STATE, action) {
           ["asc", "asc"]
         );
         draft.page = state.page + 1;
+        break;
+
+      case "@products/INDEX_ONE_PRODUCT_REQUEST":
+        draft.status.loading = true;
+        draft.error = INITIAL_STATE.error;
+        break;
+
+      case "@products/INDEX_ONE_PRODUCT_SUCCESS":
+        draft.status.loading = false;
+        draft.product = action.payload.body;
         break;
 
       case "@products/PRODUCTS_FAILURE":

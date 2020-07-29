@@ -28,14 +28,15 @@ export default function user(state = INITIAL_STATE, action) {
 
       case "@user/UPDATE_AVATAR_SUCCESS":
         draft.status.loading = false;
-        draft.profile.avatar = action.payload.body.url;
+        draft.profile.avatar = action.payload.body.uri;
         break;
 
       case "@auth/SIGN_IN_SUCCESS":
-        const { name, username, email } = action.payload.body;
+        const { name, username, email, avatar } = action.payload.body;
         draft.profile.name = name;
         draft.profile.username = username;
         draft.profile.email = email;
+        draft.profile.avatar = avatar;
         break;
 
       case "@user/UPDATE_USER_REQUEST":

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import { useSelector } from "react-redux";
+
 import View from "./view";
 
 function Index() {
@@ -10,6 +12,8 @@ function Index() {
   const [cvv, setCvv] = useState("000");
   const [valid, setValid] = useState("00/0000");
   const [name, setName] = useState("nome do proprietário");
+  const total = useSelector((state) => state.cart.total);
+  const amount = useSelector((state) => state.cart.amount);
 
   useEffect(() => {
     if (cardNumber.length === 0) setCardNumber("0000 0000 0000 0000");
@@ -37,6 +41,8 @@ function Index() {
       name={name}
       setName={setName}
       onGrantLostFocus={onGrantLostFocus}
+      total={total}
+      amount={amount}
     />
   );
 }

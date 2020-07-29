@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   flex: 1;
@@ -43,7 +44,7 @@ export const PainelItems = styled.div`
   }
 `;
 
-export const Button = styled.button`
+export const Button = styled(Link)`
   padding: 5px 10px;
   border-radius: 10px;
   background: transparent;
@@ -51,6 +52,7 @@ export const Button = styled.button`
   text-align: center;
   letter-spacing: 2.5px;
   border: 1px solid #000;
+  text-decoration: none;
 
   @media (min-width: 824px) {
     letter-spacing: 5px;

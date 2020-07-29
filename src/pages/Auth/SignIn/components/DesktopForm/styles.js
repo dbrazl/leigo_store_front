@@ -101,6 +101,7 @@ export const Button = styled.button`
   justify-content: center;
   background: #424242;
   margin-top: 50px;
+  cursor: pointer;
 `;
 
 export const SignIn = styled(FiLogIn)`

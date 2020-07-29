@@ -13,8 +13,7 @@ import {
 import { setRoute } from "../../store/modules/route/actions";
 
 import { useDispatch, useSelector } from "react-redux";
-
-import asset1 from "../../assets/images/items/asset1.png";
+import { indexOneProductRequest } from "~/store/modules/products/actions";
 
 import Header from "../../components/Header";
 
@@ -44,37 +43,27 @@ import {
 } from "./styles";
 
 function Product({ match: { params } }) {
-  const [product, setProduct] = useState(null);
+  const { id } = params;
 
-  const products = useSelector((state) => state.products.products);
+  const product = useSelector((state) => state.products.product);
   const totalCart = useSelector((state) => state.cart.total);
   const productsCart = useSelector((state) => state.cart.products);
+
   const dispatch = useDispatch();
 
-  const productMock = {
-    id: 1,
-    name: "Caneca JOIA 2018",
-    image: asset1,
-    imageSmall: true,
-    stock: 5,
-    amount: 0,
-    category: "Canecas",
-    description: "Copo preto metálico do JOIA 2018 versão kit.",
-    price: 30.0,
-    url:
-      "https://www.facebook.com/atletica.uff/photos/pcb.1220790521600500/1220790488267170/",
-  };
-
   useEffect(() => {
-    const { id } = params;
-    const finded = products.find((one) => one.id === id);
-    setProduct(finded);
     window.scrollTo(0, 0);
 
     dispatch(setRoute("Product"));
+    dispatch(indexOneProductRequest({ id }));
   }, []);
 
-  const price = productMock.price.toLocaleString("pt-BR", {
+  // useEffect(() => {
+  //   setImage(product.image);
+
+  // }, [product])
+
+  const price = product.unit_price.toLocaleString("pt-BR", {
     style: "currency",
     currency: "BRL",
   });
@@ -87,7 +76,7 @@ function Product({ match: { params } }) {
   let count = 0;
 
   productsCart.forEach((product) => {
-    if (product.id === productMock.id) count = product.amount;
+    if (product.id === product.id) count = product.amount;
   });
 
   return (
@@ -96,21 +85,26 @@ function Product({ match: { params } }) {
       <Container>
         <Content>
           <Board>
-            <Photo imageSmall={true} src={productMock.image} />
+            <Photo
+              imageSmall={product.image.image_small}
+              src={product.image.uri}
+            />
             <Price>{price}</Price>
           </Board>
           <Info>
-            <Name>{productMock.name}</Name>
+            <Name>{product.name}</Name>
             <Tags>
               <Label>tags:</Label>
-              <Tag>canecas</Tag>
+              <Tag>
+                {product.categories.map((category) => category.category)}
+              </Tag>
             </Tags>
-            <Description>{productMock.description}</Description>
+            <Description>{product.description}</Description>
             <Controller>
-              <Minus onClick={() => dispatch(removeOneFromCart(productMock))} />
+              <Minus onClick={() => dispatch(removeOneFromCart(product))} />
               <Count>{count}</Count>
-              <Plus onClick={() => dispatch(addToCart(productMock))} />
-              <Trash onClick={() => dispatch(removeFromCart(productMock))} />
+              <Plus onClick={() => dispatch(addToCart(product))} />
+              <Trash onClick={() => dispatch(removeFromCart(product))} />
             </Controller>
             <Total>
               <Label>total</Label>
@@ -118,13 +112,13 @@ function Product({ match: { params } }) {
             </Total>
           </Info>
           <Social>
-            <FacebookShareButton url={productMock.url}>
+            <FacebookShareButton url={product.image.uri}>
               <Facebook />
             </FacebookShareButton>
-            <EmailShareButton url={productMock.url}>
+            <EmailShareButton url={product.image.uri}>
               <Email />
             </EmailShareButton>
-            <WhatsappShareButton url={productMock.url}>
+            <WhatsappShareButton url={product.image.uri}>
               <Whatsapp />
             </WhatsappShareButton>
           </Social>

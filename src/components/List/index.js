@@ -37,21 +37,14 @@ function List({ noFilters, products, topList }) {
   const [filtered, setFiltered] = useState(products);
   const [length, setLenght] = useState(products.lenght);
 
-  const categories = [
-    "Todos",
-    "Camisas",
-    "Blusas",
-    "Bones",
-    "Casacos",
-    "Meia",
-    "Shorts",
-    "Copos",
-    "Canecas",
-    "Tirantes",
-  ];
-
-  // const categories = useSelector((state) => state.products.categories);
   const productsOnCart = useSelector((state) => state.cart.products);
+
+  let categories = ["Todos"];
+  products.forEach((product) => {
+    product.categories.forEach((category) => {
+      categories.push(category.category);
+    });
+  });
 
   useEffect(() => {
     if (products.length !== length) {
@@ -68,7 +61,13 @@ function List({ noFilters, products, topList }) {
     setNav(tab);
 
     if (tab !== "Todos") {
-      const filter = products.filter((item) => item.category === tab);
+      let filter = [];
+      products.forEach((product) => {
+        product.categories.forEach((category) => {
+          if (category.category === tab) filter.push(product);
+        });
+      });
+
       setFiltered(filter);
     } else setFiltered(products);
   }
@@ -85,7 +84,7 @@ function List({ noFilters, products, topList }) {
     setFiltered(filter);
   }
 
-  function renderLabel(name) {
+  function renderCategorie(name) {
     const selected = categories.find((item) => item === nav);
 
     if (name === selected)
@@ -100,7 +99,7 @@ function List({ noFilters, products, topList }) {
 
   function renderItem(product) {
     const onCart = productsOnCart.find((item) => item.id === product.id);
-    const price = product.price.toLocaleString("pt-BR", {
+    const price = product.unit_price.toLocaleString("pt-BR", {
       style: "currency",
       currency: "BRL",
     });
@@ -109,7 +108,7 @@ function List({ noFilters, products, topList }) {
       return (
         <Item>
           <Board to={`/product/${product.id}`}>
-            <Photo imageSmall={product.imageSmall} src={product.image} />
+            <Photo imageSmall={product.image_small} src={product.image} />
             <Price>{price}</Price>
           </Board>
           <Name>{product.name}</Name>
@@ -137,7 +136,7 @@ function List({ noFilters, products, topList }) {
               <Icon />
             </Search>
             <WrapperMenu>
-              <Menu>{categories.map((name) => renderLabel(name))}</Menu>
+              <Menu>{categories.map((name) => renderCategorie(name))}</Menu>
             </WrapperMenu>
           </>
         )}

@@ -50,22 +50,29 @@ function DesktopForm({
   setName,
   onGrantLostFocus,
   selected,
+  total,
+  amount,
 }) {
+  const price = total.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+
   function renderBillet() {
     return (
       <>
         <Centralize>
           <Baseline>
-            <Quantity>4</Quantity>
-            <SmallLabel>items</SmallLabel>
+            <Quantity>{amount}</Quantity>
+            <SmallLabel>{amount === 1 ? "item" : "items"}</SmallLabel>
           </Baseline>
           <Baseline marginTop={30}>
-            <Total>R$ 260,00</Total>
+            <Total>{price}</Total>
           </Baseline>
         </Centralize>
         <Footer>
           <Buttons>
-            <Back>voltar</Back>
+            <Back to="/cart">voltar</Back>
             <Button>
               <Dolar />
             </Button>
@@ -138,12 +145,14 @@ function DesktopForm({
         </Column>
         <Footer>
           <Sell>
-            <Quantity>4</Quantity>
-            <SmallLabel fontSize={24}>items</SmallLabel>
-            <Total marginLeft={50}>R$ 260,00</Total>
+            <Quantity>{amount}</Quantity>
+            <SmallLabel fontSize={24}>
+              {amount === 1 ? "item" : "items"}
+            </SmallLabel>
+            <Total marginLeft={50}>{price}</Total>
           </Sell>
           <Buttons>
-            <Back>voltar</Back>
+            <Back to="/cart">voltar</Back>
             <Button>
               <CreditCard />
             </Button>
@@ -167,6 +176,8 @@ DesktopForm.propTypes = {
   setName: PropTypes.func,
   onGrantLostFocus: PropTypes.func,
   selected: PropTypes.string,
+  total: PropTypes.number,
+  amount: PropTypes.number,
 };
 
 DesktopForm.defaultProps = {
@@ -181,6 +192,8 @@ DesktopForm.defaultProps = {
   setName: () => {},
   onGrantLostFocus: () => {},
   selected: "Boleto",
+  total: 0,
+  amount: 0,
 };
 
 export default DesktopForm;

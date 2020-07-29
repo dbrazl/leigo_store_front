@@ -23,8 +23,8 @@ export default function* errorHandler(error, callback) {
       break treat;
     }
 
-    const response = JSON.parse(error.response.request._response);
-    message = response.message;
+    const response = error.response.data;
+    message = response.errorMessage;
     reasons = response.reasons;
   }
 

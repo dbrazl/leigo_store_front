@@ -22,7 +22,7 @@ export default function cart(state = INITIAL_STATE, action) {
             oneAdd.amount++;
             const unionAdd = _.unionBy([oneAdd], state.products, "id");
             draft.products = _.orderBy(unionAdd, ["name"], ["asc"]);
-            draft.total += action.payload.item.price;
+            draft.total += action.payload.item.unit_price;
             draft.amount = state.amount + 1;
             break add;
           }
@@ -32,7 +32,7 @@ export default function cart(state = INITIAL_STATE, action) {
 
           const unionAdd = _.unionBy([toAdd], state.products, "id");
           draft.products = _.orderBy(unionAdd, ["name"], ["asc"]);
-          draft.total += action.payload.item.price;
+          draft.total += action.payload.item.unit_price;
           draft.amount = state.amount + 1;
         }
         break;
@@ -59,7 +59,7 @@ export default function cart(state = INITIAL_STATE, action) {
           );
         }
 
-        if (state.total > 0) draft.total -= action.payload.item.price;
+        if (state.total > 0) draft.total -= action.payload.item.unit_price;
         if (state.amount > 0) draft.amount = state.amount - 1;
         break;
 
@@ -74,7 +74,7 @@ export default function cart(state = INITIAL_STATE, action) {
             [action.payload.item],
             "id"
           );
-          draft.total -= one.price * one.amount;
+          draft.total -= one.unit_price * one.amount;
           draft.amount = state.amount - one.amount;
         }
 
